@@ -1,0 +1,7 @@
+#!/bin/sh
+
+####
+## This is the loader file which will load the programe
+####
+
+./make/release/encoder-decoder
