@@ -1,0 +1,7 @@
+#!/bin/sh
+
+####
+## This file is created to clean the project output file
+####
+
+rm -r make/release/EncoderDecoder
