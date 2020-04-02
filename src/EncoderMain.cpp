@@ -1,28 +1,28 @@
-#include "util/header_files/TypeSetter.hpp"
+#include "EncoderMain.hpp"
 
 int main()
 {
-
-    TypeSetter *typeSetter = new TypeSetter();
+    
     while (true)
     {
-        typeSetter->SetProcessType();
+        // TypeSetter *typeSetter = new TypeSetter();
+        // TextEncoder *textEncoder = new TextEncoder();
         typeSetter->SetDataType();
-        std::cout<< Type::ProcessType << std::endl;
-        switch (Type::DataType && Type::ProcessType)
+        switch (Type::DataType)
         {
-        case 1 && 1:
-            //it means user wants to encode text data
+        case 1:
             std::cout << "user wants to encode text data" << std::endl;
+            textEncoder->SetInputType();
+            textEncoder->StartEncoding();
             break;
+
+        case 2:
+            std::cout << "user want to encode image data" << std::endl;
+            break;
+
         default:
             std::cout<< "No Condition matches" << std::endl;
             break;
         }
-        // if (Type::ProcessType == 1) {
-        //     // It means it wants to encode
-        //     // now we are checking what kind of data user want to encode
-
-        // }
     }
 }

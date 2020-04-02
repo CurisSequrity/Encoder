@@ -1,18 +1,9 @@
 #pragma once
 
-#include <iostream>
+#include "BaseHeaders.hpp"
 
 namespace Type
 {
-    
-/*
-Process type is to store the type of process we need to do
-Example 
-1 -> Encodation;
-2 -> Decodation;
-and so on;;
-*/
-inline int ProcessType;
 
 /*
 Data type is to store the type of Data we need to do
@@ -23,14 +14,19 @@ and so on;;
 */
 inline int DataType;
 
-}
+/*
+Text Input type store the way we will get the text data from user
+Example 
+1. Runtime Text
+2. Get data from a text document
+*/
+inline int TextInputType;
+
+} // namespace Type
 
 class TypeSetter
 {
 public:
-    void SetProcessType();
     void SetDataType();
-
-private:
-    void DataTypeText();
+    void SetTextInputType();
 };

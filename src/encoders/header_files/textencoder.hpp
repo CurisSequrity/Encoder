@@ -1,13 +1,15 @@
 #pragma once
 
-#include "../../util/strings.hpp"
+#include "../../util/header_files/BaseHeaders.hpp"
+#include "../../util/header_files/TypeSetter.hpp"
+//#include "../../util/header_files/strings.hpp"
 
-#include <iostream>
+class TextEncoder
+{
+public:
+    void SetInputType();
+    void StartEncoding();
 
-using namespace std;
-
-namespace TextEncoder
-{  
-    string CustomText;
-    void CustomTextEncoding();
-} // namespace TextEncoder
+private:
+    void Encode();
+};

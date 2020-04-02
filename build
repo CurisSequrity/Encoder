@@ -4,4 +4,4 @@
 ## This file build the object file for our project
 ####
 
-g++ --std=c++17 ./src/*.cpp ./src/util/cpp_files/*.cpp -o ./make/release/EncoderDecoder -pthread
+g++ --std=c++17 ./src/*.cpp ./src/util/cpp_files/*.cpp ./src/encoders/cpp_files/*.cpp -o ./make/release/EncoderDecoder -pthread
