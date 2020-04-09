@@ -3,5 +3,5 @@
 #include <iostream>
 namespace DATA
 {
-    inline std::string TextData;
+    inline std::string RuntimeTextData;
 } // namespace DATA
