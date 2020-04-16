@@ -1,0 +1,3 @@
+hello my name is pritam
+I am working on this encoder
+This is first testing

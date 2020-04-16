@@ -1,38 +1,157 @@
+// This is text Encoder Functions here all the text encodation systems are done
+// Like Runtime Text Encodation Encode Text From Document
+// Show Encoded Text Or Save Encoded Text In document
+
 #include "../header_files/TextEncoder.hpp"
 
 /*
-**It will get text from user and store in DATA::RuntimeTextData.hpp which you will find in
-**src/DATA::RuntimeTextData/runtime_data
+** It will get text from user and store in DATA::RuntimeTextData which you will find in
+** src/data/DATA::RuntimeTextData
+** The data will be vanished if you will not save the data during programe running
 */
 void TextEncoder::StartRealtimeEncoding()
 {
-    GetData *getData = new GetData();
-    DATA::RuntimeTextData = getData->GetRuntimeText();
-    Encode();
+    if (!(getData->GetRuntimeText(DATA::RuntimeTextData)))
+    {
+        cout << "Process Incomplete Some error occured" << endl;
+        return;
+    }
+    Encode(DATA::RuntimeTextData);
+    return;
+}
+
+
+/*
+** This Function is for get data from the Document the encode that and store into DATA::DocTextData
+*/
+void TextEncoder::EncodeFromDocument()
+{
+    if (!(getData->GetDataFromDoc(DATA::DocTextData)))
+    {
+        cout << "Process Incomplete Some error occured" << endl;
+        return;
+    }
+    Encode(DATA::DocTextData);
+    cout << "Succeed :)" << endl;
+    return;
+}
+
+
+/*
+** Simply it will determine whether user encode both type of data or not (Runtime data or data from doc)
+** and check which type of data user encode then print according to that
+*/
+void TextEncoder::ShowEnocodeData()
+{
+    if (!(DATA::RuntimeTextData.empty()) && !(DATA::DocTextData.empty()))
+    {
+        while (true)
+        {
+            switch ( getInput->GetShowDataType() )
+            {
+            case 1:
+                std::cout << "Encoded Runtime Data is :- " << DATA::RuntimeTextData << std::endl;
+                return;
+                break;
+
+            case 2:
+                std::cout << "Encoded Data From Docoment :- " << DATA::DocTextData << std::endl;
+                return;
+                break;
+
+            case 3:
+                return;
+
+            default:
+                std::cout << "You entered a wrong number" << std::endl;
+                break;
+            }
+        }
+    }
+    else if (!(DATA::RuntimeTextData.empty()) && (DATA::DocTextData.empty()))
+    {
+        std::cout << "Runtime Encoded Data is :- " << DATA::RuntimeTextData << std::endl;
+        return;
+    }
+    else if ((DATA::RuntimeTextData.empty()) && !(DATA::DocTextData.empty()))
+    {
+        std::cout << "Encoded Data From Docoment is :- " << DATA::DocTextData << std::endl;
+        return;
+    }
+    else
+    {
+        std::cout << "No Data to save" << std::endl;
+        return;
+    }
 }
 
 /*
-** This method is to encode text DATA::RuntimeTextData
+** This function will save the data 
+** You can find it in src/data/output/output.ecd
 */
-void TextEncoder::Encode()
+bool TextEncoder::SaveData()
 {
-    long long Size = String::GetSize(DATA::RuntimeTextData);
+    if (!(DATA::RuntimeTextData.empty()) && !(DATA::DocTextData.empty()))
+    {
+        while (true)
+        {
+            
+            switch ( getInput->GetSaveDataType() )
+            {
+            case 1:
+                return FileHandeler::Write(DATA::path.OUPUT_PATH, DATA::RuntimeTextData);
+                break;
+
+            case 2:
+                return FileHandeler::Write(DATA::path.OUPUT_PATH, DATA::DocTextData);
+                break;
+            case 3:
+                return true;
+            default:
+                std::cout << "You entered a wrong number" << std::endl;
+                break;
+            }
+        }
+    }
+    else if (!(DATA::RuntimeTextData.empty()) && (DATA::DocTextData.empty()))
+    {
+        return FileHandeler::Write(DATA::path.OUPUT_PATH, DATA::RuntimeTextData);
+    }
+    else if ((DATA::RuntimeTextData.empty()) && !(DATA::DocTextData.empty()))
+    {
+        return FileHandeler::Write(DATA::path.OUPUT_PATH, DATA::DocTextData);
+    }
+    else
+    {
+        std::cout << "No Data to save" << std::endl;
+        return false;
+    }
+}
+
+/*
+** This method is responsible to encode text datas
+** basically This Algorithm is so basic and is in alfa mode
+** in future we more plans with the algorithm
+*/
+void TextEncoder::Encode(std::string& data)
+{
+    long long Size = String::GetSize(data);
 
     for (long long temp = 0; temp < Size; temp++)
     {
         std::thread capitalAlfab([&]() {
-            if (65 >= DATA::RuntimeTextData[temp] <= 90)
+            if (65 >= data[temp] <= 90)
             {
-                DATA::RuntimeTextData[temp] = DATA::RuntimeTextData[temp] + 635;
-                LOG::SHOW(DATA::RuntimeTextData[temp]);
+                data[temp] = data[temp] + 635;
+                // LOG::SHOW(data[temp]);
             }
         });
 
         std::thread lowerAlfab([&]() {
-            if (97 >= DATA::RuntimeTextData[temp] <= 122)
+            if (97 >= data[temp] <= 122)
             {
-                DATA::RuntimeTextData[temp] = DATA::RuntimeTextData[temp] + 220;
-                LOG::SHOW(DATA::RuntimeTextData[temp]);
+                data[temp] = data[temp] + 220;
+                // LOG::SHOW(data[temp]);
             }
         });
 
@@ -44,34 +163,21 @@ void TextEncoder::Encode()
 
         else
         {
-            if (65 >= DATA::RuntimeTextData[temp] <= 90)
+            if (65 >= data[temp] <= 90)
             {
-                DATA::RuntimeTextData[temp] = DATA::RuntimeTextData[temp] + 635;
-                // LOG::SHOW(DATA::RuntimeTextData[temp]);
+                data[temp] = data[temp] + 635;
+                // LOG::SHOW(data[temp]);
             }
-            else if (97 >= DATA::RuntimeTextData[temp] <= 122)
+            else if (97 >= data[temp] <= 122)
             {
-                DATA::RuntimeTextData[temp] = DATA::RuntimeTextData[temp] + 220;
-                // LOG::SHOW(DATA::RuntimeTextData[temp]);
+                data[temp] = data[temp] + 220;
+                // LOG::SHOW(data[temp]);
             }
             else
             {
-                DATA::RuntimeTextData[temp] = DATA::RuntimeTextData[temp] + 220;
-                // LOG::SHOW(DATA::RuntimeTextData[temp]);
+                data[temp] = data[temp] + 220;
+                // LOG::SHOW(data[temp]);
             }
         }
-    }
-}
-
-void TextEncoder::ShowEnocodeData()
-{
-    if (String::GetSize(DATA::RuntimeTextData) == 0)
-    {
-        std::cout << "No DATA::RuntimeTextData To Show" << std::endl;
-        return;
-    }
-    else
-    {
-        std::cout << "Your Encoded Text :- " << DATA::RuntimeTextData << std::endl;
     }
 }
