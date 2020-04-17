@@ -4,7 +4,7 @@
 
 #include "../header_files/FileHandeler.hpp"
 
-bool FileHandeler::Read(const std::string& PATH, std::string& variable)
+bool FileHandeler::ReadText(const std::string& PATH, std::string& variable)
 {
     ReadFile.open(PATH);
     while (std::getline(ReadFile, TempData))
@@ -26,7 +26,7 @@ bool FileHandeler::Read(const std::string& PATH, std::string& variable)
     return !(ReadFile.fail());
 }
 
-bool FileHandeler::Read(std::string& PATH, std::string& variable)
+bool FileHandeler::ReadText(std::string& PATH, std::string& variable)
 {
     ReadFile.open(PATH);
     while (std::getline(ReadFile, TempData))
@@ -47,7 +47,7 @@ bool FileHandeler::Read(std::string& PATH, std::string& variable)
     return ReadFile.fail();
 }
 
-std::string FileHandeler::Read(const std::string& PATH)
+std::string FileHandeler::ReadText(const std::string& PATH)
 {
     ReadFile.open(PATH);
     while (std::getline(ReadFile, TempData))
@@ -64,7 +64,7 @@ std::string FileHandeler::Read(const std::string& PATH)
     return TempData;
 }
 
-std::string FileHandeler::Read(std::string& PATH)
+std::string FileHandeler::ReadText(std::string& PATH)
 {
     ReadFile.open(PATH);
     while (std::getline(ReadFile, TempData))
@@ -81,9 +81,43 @@ std::string FileHandeler::Read(std::string& PATH)
     return TempData;
 }
 
-bool FileHandeler::Write(const std::string& PATH, std::string& data)
+bool FileHandeler::ReadImage(const std::string& PATH, std::vector<uint8_t>& data)
 {
-    TempData = FileHandeler::Read(PATH);
+    ReadFile.open(PATH, std::ios::binary);
+	std::vector<uint8_t> v{std::istreambuf_iterator<char>{ReadFile}, {}};
+	data = v;
+	ReadFile.close();
+	return !(v.empty());
+}
+
+bool FileHandeler::ReadImage(std::string& PATH, std::vector<uint8_t>& data)
+{
+    ReadFile.open(PATH, std::ios::binary);
+	std::vector<uint8_t> v{std::istreambuf_iterator<char>{ReadFile}, {}};
+	data = v;
+	ReadFile.close();
+	return !(v.empty());
+}
+
+std::vector<uint8_t> FileHandeler::ReadImage(const std::string& PATH)
+{
+    ReadFile.open(PATH, std::ios::binary);
+	std::vector<uint8_t> data{std::istreambuf_iterator<char>{ReadFile}, {}};
+	ReadFile.close();
+	return data;
+}
+
+std::vector<uint8_t> FileHandeler::ReadImage(std::string& PATH)
+{
+    ReadFile.open(PATH, std::ios::binary);
+	std::vector<uint8_t> data{std::istreambuf_iterator<char>{ReadFile}, {}};
+	ReadFile.close();
+	return data;
+}
+
+bool FileHandeler::WriteText(const std::string& PATH, std::string& data)
+{
+    TempData = FileHandeler::ReadText(PATH);
     WriteFile.open(PATH);
     data = TempData + data;
     WriteFile << data << endl;
@@ -93,9 +127,9 @@ bool FileHandeler::Write(const std::string& PATH, std::string& data)
     return !(WriteFile.fail());
 }
 
-bool FileHandeler::Write(std::string& PATH, std::string& data)
+bool FileHandeler::WriteText(std::string& PATH, std::string& data)
 {
-    TempData = FileHandeler::Read(PATH);
+    TempData = FileHandeler::ReadText(PATH);
     WriteFile.open(PATH);
     data = TempData + data;
     WriteFile << data << endl;
@@ -103,4 +137,28 @@ bool FileHandeler::Write(std::string& PATH, std::string& data)
     WriteFile.close();
 
     return !(WriteFile.fail());
+}
+
+bool FileHandeler::WriteImage(const std::string& PATH, std::vector<uint8_t>& data)
+{
+    WriteFile.open(PATH, std::ios::binary);
+
+	for(int i = 0; i < data.size(); i++)
+	{
+		WriteFile << data.at(i);
+	}
+	WriteFile.close();
+	return true;
+}
+
+bool FileHandeler::WriteImage(std::string& PATH, std::vector<uint8_t>& data)
+{
+    WriteFile.open(PATH, std::ios::binary);
+
+	for(int i = 0; i < data.size(); i++)
+	{
+		WriteFile << data.at(i);
+	}
+	WriteFile.close();
+	return true;
 }

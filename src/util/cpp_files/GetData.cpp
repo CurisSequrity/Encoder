@@ -38,5 +38,5 @@ bool GetData::GetRuntimeText(std::string& data)
 */
 bool GetData::GetDataFromDoc(std::string& data)
 {
-    return FileHandeler::Read(DATA::path.INPUT_PATH, data);
+    return FileHandeler::ReadText(DATA::path.INPUT_PATH, data);
 }
