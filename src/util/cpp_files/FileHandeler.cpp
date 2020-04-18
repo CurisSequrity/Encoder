@@ -47,7 +47,7 @@ bool FileHandeler::ReadText(std::string& PATH, std::string& variable)
     return ReadFile.fail();
 }
 
-std::string FileHandeler::ReadText(const std::string& PATH)
+std::string FileHandeler::ReadText(std::string& PATH)
 {
     ReadFile.open(PATH);
     while (std::getline(ReadFile, TempData))
@@ -64,7 +64,7 @@ std::string FileHandeler::ReadText(const std::string& PATH)
     return TempData;
 }
 
-std::string FileHandeler::ReadText(std::string& PATH)
+std::string FileHandeler::ReadText(const std::string& PATH)
 {
     ReadFile.open(PATH);
     while (std::getline(ReadFile, TempData))

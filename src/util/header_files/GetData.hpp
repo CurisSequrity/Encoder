@@ -12,8 +12,12 @@
 class GetData
 {
     public:
-        void GetText();
         bool GetRuntimeText(std::string&);
+        std::string GetRuntimeText();
+
         bool GetDataFromDoc(std::string&);
-        void GetImage();
+        std::string GetDataFromDoc();
+
+        bool GetImageData(std::vector<uint8_t>&);
+        std::vector<uint8_t> GetImageData();
 };

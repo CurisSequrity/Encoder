@@ -4,8 +4,10 @@
 
 struct PATH
 {
-    std::string INPUT_PATH = "src/data/input/input.txt";
-    std::string OUPUT_PATH = "src/data/output/output.ecd";
+    std::string TEXT_INPUT_PATH = "src/data/input/input.txt";
+    std::string TEXT_OUPUT_PATH = "src/data/output/output.ecd";
+    std::string IMAGE_INPUT_PATH = "src/data/input/input.jpeg";
+    std::string IMAGE_OUTPUT_PATH = "src/data/output/output.jpeg";
 };
 
 

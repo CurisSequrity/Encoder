@@ -99,11 +99,11 @@ bool TextEncoder::SaveData()
             switch ( getInput->GetSaveDataType() )
             {
             case 1:
-                return FileHandeler::WriteText(DATA::path.OUPUT_PATH, DATA::RuntimeTextData);
+                return FileHandeler::WriteText(DATA::path.TEXT_OUPUT_PATH, DATA::RuntimeTextData);
                 break;
 
             case 2:
-                return FileHandeler::WriteText(DATA::path.OUPUT_PATH, DATA::DocTextData);
+                return FileHandeler::WriteText(DATA::path.TEXT_OUPUT_PATH, DATA::DocTextData);
                 break;
             case 3:
                 return true;
@@ -115,11 +115,11 @@ bool TextEncoder::SaveData()
     }
     else if (!(DATA::RuntimeTextData.empty()) && (DATA::DocTextData.empty()))
     {
-        return FileHandeler::WriteText(DATA::path.OUPUT_PATH, DATA::RuntimeTextData);
+        return FileHandeler::WriteText(DATA::path.TEXT_OUPUT_PATH, DATA::RuntimeTextData);
     }
     else if ((DATA::RuntimeTextData.empty()) && !(DATA::DocTextData.empty()))
     {
-        return FileHandeler::WriteText(DATA::path.OUPUT_PATH, DATA::DocTextData);
+        return FileHandeler::WriteText(DATA::path.TEXT_OUPUT_PATH, DATA::DocTextData);
     }
     else
     {

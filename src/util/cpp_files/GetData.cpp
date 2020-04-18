@@ -1,26 +1,6 @@
 #include "../header_files/GetData.hpp"
 
 /*
-**This Method is to determine how the text input will happen
-*/
-// void GetData::GetText()
-// {
-//     switch (Type::TextInputType)
-//     {
-//     case 1:
-//         GetData::GetRuntimeText();
-//         break;
-
-//     case 2:
-//         //feature under progress
-//         break;
-//     default:
-//         std::cout << "You entered wrong number" << std::endl;
-//         return;
-//     }
-// }
-
-/*
 ** This method get text data from terminal
 */
 bool GetData::GetRuntimeText(std::string& data)
@@ -30,13 +10,33 @@ bool GetData::GetRuntimeText(std::string& data)
     getline(cin, data); // fixed looping issue when user want to enter a line
     
     return !(data.empty());
-
 }
+//end
 
 /*
 ** THis method is to get data from Text Document
 */
 bool GetData::GetDataFromDoc(std::string& data)
 {
-    return FileHandeler::ReadText(DATA::path.INPUT_PATH, data);
+    return FileHandeler::ReadText(DATA::path.TEXT_INPUT_PATH, data);
 }
+
+std::string GetData::GetDataFromDoc()
+{
+    return FileHandeler::ReadText(DATA::path.TEXT_INPUT_PATH);
+}
+// end
+
+/*
+** Start of GetImage Funtions
+*/
+bool GetData::GetImageData(std::vector<uint8_t>& data)
+{
+    return FileHandeler::ReadImage(DATA::path.IMAGE_INPUT_PATH, data);
+}
+
+std::vector<uint8_t> GetData::GetImageData()
+{
+    return FileHandeler::ReadImage(DATA::path.IMAGE_INPUT_PATH);
+}
+//end
