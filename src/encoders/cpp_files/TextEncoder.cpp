@@ -26,7 +26,7 @@ void TextEncoder::StartRealtimeEncoding()
 */
 void TextEncoder::EncodeFromDocument()
 {
-    if (!(getData->GetDataFromDoc(DATA::DocTextData)))
+    if (!(getData->GetDataFromDoc(DATA::DocTextData))) //  cheacking if  there is any error during data insertion
     {
         cout << "Process Incomplete Some error occured" << endl;
         return;
@@ -47,7 +47,7 @@ void TextEncoder::ShowEnocodeData()
     {
         while (true)
         {
-            switch ( getInput->GetShowDataType() )
+            switch ( GetInput::GetShowDataType() )
             {
             case 1:
                 std::cout << "Encoded Runtime Data is :- " << DATA::RuntimeTextData << std::endl;
@@ -96,7 +96,7 @@ bool TextEncoder::SaveData()
         while (true)
         {
             
-            switch ( getInput->GetSaveDataType() )
+            switch ( GetInput::GetSaveDataType() )
             {
             case 1:
                 return FileHandeler::WriteText(DATA::path.TEXT_OUPUT_PATH, DATA::RuntimeTextData);

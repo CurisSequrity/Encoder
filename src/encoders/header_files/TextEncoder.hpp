@@ -10,7 +10,6 @@ class TextEncoder
 {
 public:
     GetData *getData;
-    GetInput *getInput;
     void SetInputType();
     void StartRealtimeEncoding();
     void EncodeFromDocument();

@@ -4,4 +4,4 @@
 ## This is the loader file which will load the programe
 ####
 
-./make/release/EncoderDecoder
+./make/release/Encoder
