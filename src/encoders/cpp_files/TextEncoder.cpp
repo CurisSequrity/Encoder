@@ -141,20 +141,18 @@ void TextEncoder::Encode(std::string& data)
     {
         std::thread capitalAlfab([&]() {
             if (65 >= data[temp] <= 90)
-            {
                 if (temp % 2)
                     data[temp] += 635;
-                // LOG::SHOW(data[temp]);
-            }
+            else if (data[temp] != 97 || 122)
+                data[temp] = data[temp] << 3;
+            
         });
 
         std::thread lowerAlfab([&]() {
             if (97 >= data[temp] <= 122)
-            {
                 if (temp % 2)
                     data[temp] += 220;
                 // LOG::SHOW(data[temp]);
-            }
         });
 
         if (capitalAlfab.joinable() && lowerAlfab.joinable())
@@ -179,7 +177,7 @@ void TextEncoder::Encode(std::string& data)
             }
             else
             {
-                data[temp] += 220;
+                data[temp] = data[temp] << 3;
                 // LOG::SHOW(data[temp]);
             }
         }
