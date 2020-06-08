@@ -167,12 +167,14 @@ void TextEncoder::Encode(std::string& data)
         {
             if (65 >= data[temp] <= 90)
             {
-                data[temp] += 635;
+                if (temp % 2 )
+                    data[temp] += 635;
                 // LOG::SHOW(data[temp]);
             }
             else if (97 >= data[temp] <= 122)
             {
-                data[temp] += 220;
+                if (temp % 2)
+                    data[temp] += 220;
                 // LOG::SHOW(data[temp]);
             }
             else
