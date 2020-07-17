@@ -3,6 +3,7 @@
 #include "util/header_files/BaseHeaders.hpp"
 #include "util/header_files/GetInput.hpp"
 #include "encoders/header_files/TextEncoder.hpp"
+#include "encoders/header_files/ImageEncoder.hpp"
 #include "util/header_files/Log.hpp"
 
 class Encoder
@@ -15,8 +16,10 @@ class Encoder
 
 private:
     inline bool TextEncoding(void);
+    inline bool ImageEncoding(void);
     // DataType dataType;
     TextEncoder *textEncoder; // allocating memory in head
+    ImageEncoder *imageEncoder;
 };
 
 
@@ -28,6 +31,7 @@ private:
 inline Encoder::Encoder()
 {
     this->textEncoder = new TextEncoder(); // allocating memory into heap
+    this->imageEncoder = new ImageEncoder(); // Allocating memory into the heap
 }
 
 /*
@@ -46,7 +50,7 @@ inline bool Encoder::StartEncoding(void)
             while ( this->TextEncoding() );
             break;
         case DataType::ImageEncoder :
-            std::cout << "user want to encode image data" << std::endl;
+            while (this->ImageEncoding());
             break;
         case DataType::Exit :
             exit(0);
@@ -89,6 +93,37 @@ inline bool Encoder::TextEncoding()
             break;
 
         case TextOptions::Exit:
+            exit(0);
+            break;
+        default:
+            std::cout << "You Entered the wrong input" << std::endl;
+        }
+    return true;
+}
+
+inline bool Encoder::ImageEncoding()
+{
+        switch ((ImageOptions)GetInput::GetImageOption())
+        {
+        case ImageOptions::PullImage:
+            imageEncoder->PullImage();
+            break;
+
+        case ImageOptions::ShowData:
+            imageEncoder->ShowData();
+            break;
+
+        case ImageOptions::SaveData:
+            if (imageEncoder->SaveData())
+                std::cout << "succeed" << std::endl;
+            else
+                std::cout << "failed" << std::endl;
+            break;
+
+        case ImageOptions::Back :
+            break;
+
+        case ImageOptions::Exit:
             exit(0);
             break;
         default:

@@ -173,12 +173,10 @@ void TextEncoder::Encode(std::string& data)
             {
                 if (temp % 2)
                     data[temp] += 220;
-                // LOG::SHOW(data[temp]);
             }
             else
             {
                 data[temp] = data[temp] << 3;
-                // LOG::SHOW(data[temp]);
             }
         }
     }
